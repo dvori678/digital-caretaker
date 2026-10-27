@@ -6,6 +6,7 @@ import { useState } from "react"
 import useDebounce from "../hooks/useDebounce"
 import TaskFiltersBar from "../components/taskFiltersBar"
 import { Link } from "react-router"
+import TaskSummary from "../components/taskSummary"
 
 const TasksPage = () => {
     const [filters, setFilters] = useState<TaskFilters>({ category: "", priority: "", status: "", sort: "" })
@@ -17,6 +18,7 @@ const TasksPage = () => {
         queryFn: () => getTasks(query),
     })
     return (<>
+        <TaskSummary />
         <TaskFiltersBar filters={filters} onFiltersChange={setFilters} />
         <label>
             חיפוש

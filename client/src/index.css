@@ -341,3 +341,34 @@ li p.overdue {
 .login-title + .login-form {
   margin-top: 1.25rem;
 }
+.summary {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.summary-card {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  border: 1px solid #e3e7ea;
+  border-top: 3px solid var(--primary);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.summary-count {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.summary-new { border-top-color: #3a7bd5; }
+.summary-in_progress { border-top-color: #e0a030; }
+.summary-done { border-top-color: #3a9a5b; }
