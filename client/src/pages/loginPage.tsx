@@ -8,7 +8,7 @@ const LoginPage = () => {
         return <Navigate to="/tasks" replace />
     }
     return (<>
-   <h2 className="login-title">התחברות</h2> 
+   <h2 className="mt-8 text-center text-[1.6rem] font-bold text-primary">התחברות</h2> 
     <LoginForm />
     </>)
 }

@@ -167,9 +167,7 @@
   }
 
   /* ---------- עמוד התחברות ---------- */
-  .login-title {
-    @apply mt-8 text-center text-[1.6rem] font-bold text-primary;
-  }
+
 
   .login-form {
     @apply mx-auto mt-10 w-full max-w-[400px];

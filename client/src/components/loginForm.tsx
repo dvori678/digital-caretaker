@@ -30,7 +30,7 @@ const LoginForm = () => {
         },
     })
     const onLogin = (data: LoginFormData) => mutate(data)
-    return (<form className="login-form" onSubmit={handleSubmit(onLogin)}>
+    return (<form className="mx-auto mt-5 w-full max-w-[400px]" onSubmit={handleSubmit(onLogin)}>
         <FormField id="email" label="מייל" error={errors.email?.message}>
             <input {...register("email")} id="email" type="email" />
         </FormField>
