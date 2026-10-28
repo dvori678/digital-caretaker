@@ -37,27 +37,8 @@
     @apply mx-auto flex min-h-screen max-w-[760px] flex-col px-4 pb-8;
   }
 
-  /* ---------- Header ---------- */
-  header {
-    @apply mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-line py-4;
-  }
 
-  header h1 {
-    @apply text-[1.4rem] font-bold text-primary;
-  }
 
-  header nav {
-    @apply flex flex-wrap items-center gap-4;
-  }
-
-  header a {
-    @apply font-medium text-ink no-underline hover:text-primary;
-  }
-
-  /* ---------- Footer ---------- */
-  footer {
-    @apply mt-auto pt-6 text-center text-sm text-muted;
-  }
 
   /* ---------- טפסים ---------- */
   form {
@@ -96,10 +77,6 @@
     @apply hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60;
   }
 
-  /* כפתור ההתנתקות: משני, לא בולט */
-  header button {
-    @apply bg-transparent text-primary hover:bg-primary-soft;
-  }
 
   /* כפתור רגיל בתוך טופס (מחיקה) */
   form button[type="button"] {

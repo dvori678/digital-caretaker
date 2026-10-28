@@ -8,13 +8,13 @@ const Header = () => {
         logout()
         navigate("/login")
     }
-    return (<header>
-        <h1>אב בית דיגיטלי</h1>
-        {user && <nav>
+    return (<header className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-line py-4">
+        <h1 className="text-[1.4rem] font-bold text-primary">אב בית דיגיטלי</h1>
+        {user && <nav className="flex flex-wrap items-center gap-4">
             <span className="user-name">{user.name}</span>
-            <Link to="/tasks">רשימת הבקשות</Link>
-            <Link to="/tasks/new">בקשה חדשה</Link>
-            <button onClick={handleLogout}>התנתקות</button>
+            <Link className="font-medium text-ink no-underline hover:text-primary" to="/tasks">רשימת הבקשות</Link>
+            <Link className="font-medium text-ink no-underline hover:text-primary" to="/tasks/new">בקשה חדשה</Link>
+            <button className="bg-transparent text-primary hover:bg-primary-soft" onClick={handleLogout}>התנתקות</button>
         </nav>}
     </header>)
 }
