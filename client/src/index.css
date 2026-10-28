@@ -1,374 +1,226 @@
 /* =========================================
-   אב בית דיגיטלי – עיצוב כללי
+   אב בית דיגיטלי – עיצוב כללי (Tailwind v4)
    ========================================= */
+@import "tailwindcss";
 
-/* ---------- צבעים ומידות במקום אחד ---------- */
-:root {
-  --bg: #f5f7f8;          /* רקע הדף */
-  --card: #ffffff;        /* רקע כרטיסים וטפסים */
-  --text: #1f2a30;        /* טקסט רגיל */
-  --muted: #5f6b72;       /* טקסט משני */
-  --border: #dde3e6;      /* מסגרות */
-  --primary: #2f6f73;     /* צבע ראשי (ירוק-כחלחל רגוע) */
-  --primary-hover: #255a5d;
-  --primary-soft: #e6f0f0;
-  --danger: #b3403a;      /* מחיקה */
-  --danger-soft: #fbeceb;
-  --radius: 10px;
+/* ---------- צבעים, גופן ופינות ----------
+   כל משתנה כאן יוצר classes של Tailwind, למשל:
+   --color-primary → bg-primary, text-primary, border-primary
+   --font-heebo    → font-heebo
+   --radius-card   → rounded-card                          */
+@theme {
+  --color-page: #f5f7f8;          /* רקע הדף */
+  --color-card: #ffffff;          /* רקע כרטיסים וטפסים */
+  --color-ink: #1f2a30;           /* טקסט רגיל */
+  --color-muted: #5f6b72;         /* טקסט משני */
+  --color-line: #dde3e6;          /* מסגרות */
+  --color-primary: #2f6f73;       /* צבע ראשי */
+  --color-primary-hover: #255a5d;
+  --color-primary-soft: #e6f0f0;
+  --color-danger: #b3403a;        /* מחיקה ושגיאות */
+  --color-danger-soft: #fbeceb;
+
+  --font-heebo: "Heebo", Arial, sans-serif;
+  --radius-card: 10px;
 }
 
-* {
-  box-sizing: border-box;
+/* =========================================
+   שכבת base – עיצוב לפי תגיות
+   ========================================= */
+@layer base {
+  body {
+    @apply bg-page font-heebo text-base leading-normal text-ink;
+  }
+
+  /* כל האתר בעמודה אחת במרכז, והתחתית נדחפת לסוף הדף */
+  #root {
+    @apply mx-auto flex min-h-screen max-w-[760px] flex-col px-4 pb-8;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    @apply mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-line py-4;
+  }
+
+  header h1 {
+    @apply text-[1.4rem] font-bold text-primary;
+  }
+
+  header nav {
+    @apply flex flex-wrap items-center gap-4;
+  }
+
+  header a {
+    @apply font-medium text-ink no-underline hover:text-primary;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    @apply mt-auto pt-6 text-center text-sm text-muted;
+  }
+
+  /* ---------- טפסים ---------- */
+  form {
+    @apply flex flex-col gap-4 rounded-card border border-line bg-card p-6;
+  }
+
+  /* ה-fieldset רק נועל שדות, בלי מסגרת משלו */
+  fieldset {
+    @apply m-0 flex min-w-0 flex-col gap-4 border-0 p-0;
+  }
+
+  label {
+    @apply mb-1 block font-medium;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply w-full rounded-lg border border-line bg-white px-3 py-2 text-ink;
+    @apply focus:border-primary focus:outline-3 focus:outline-primary-soft;
+    @apply disabled:cursor-not-allowed disabled:bg-page disabled:text-muted;
+  }
+
+  textarea {
+    @apply min-h-[100px] resize-y;
+  }
+
+  /* הודעות מתחת לשדות */
+  form p {
+    @apply mt-1 text-sm;
+  }
+
+  /* ---------- כפתורים ---------- */
+  button {
+    @apply cursor-pointer rounded-lg border border-primary bg-primary px-5 py-2 font-medium text-white;
+    @apply hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  /* כפתור ההתנתקות: משני, לא בולט */
+  header button {
+    @apply bg-transparent text-primary hover:bg-primary-soft;
+  }
+
+  /* כפתור רגיל בתוך טופס (מחיקה) */
+  form button[type="button"] {
+    @apply border-danger bg-transparent text-danger hover:bg-danger-soft;
+  }
+
+  /* ---------- רשימת הבקשות ---------- */
+  ul {
+    @apply mt-4 flex flex-col gap-3;
+  }
+
+  li {
+    @apply rounded-card border border-line bg-card transition-[border-color,box-shadow] duration-150;
+    @apply hover:border-primary hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+  }
+
+  /* כל הכרטיס לחיץ */
+  li a {
+    @apply block px-5 py-4;
+  }
+
+  li h2,
+  li h3 {
+    @apply mb-2 text-[1.1rem] font-bold;
+  }
+
+  li h4,
+  li h5,
+  li h6 {
+    @apply my-1 text-base font-medium text-muted;
+  }
+
+  li p {
+    @apply my-1 text-muted;
+  }
 }
 
-body {
-  margin: 0;
-  font-family: "Heebo", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  background: var(--bg);
-  color: var(--text);
+/* =========================================
+   שכבת components – classes שלי
+   ========================================= */
+@layer components {
+  .user-name {
+    @apply text-muted;
+  }
+
+  /* שורת הכפתורים בתחתית הטופס */
+  .form-actions {
+    @apply flex flex-wrap items-center gap-3;
+  }
+
+  /* סינונים וחיפוש */
+  .filters {
+    @apply mb-3 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3;
+  }
+
+  /* ---------- תגיות בכרטיס ---------- */
+  .badges {
+    @apply mt-3 flex flex-wrap gap-2;
+  }
+
+  .badge {
+    @apply inline-block rounded-full border border-line bg-page px-2.5 py-0.5 text-[0.8rem] font-medium text-muted;
+  }
+
+  /* עדיפות */
+  .priority-urgent { background: #fbeceb; color: #b3403a; border-color: #f0c9c6; }
+  .priority-medium { background: #fdf4e3; color: #9a6a12; border-color: #f2dfb5; }
+  .priority-low    { background: #eef2f4; color: #5f6b72; border-color: #dde3e6; }
+
+  /* סטטוס */
+  .status-new         { background: #e8f0fb; color: #2f5d9a; border-color: #c9daf2; }
+  .status-in_progress { background: #fdf4e3; color: #9a6a12; border-color: #f2dfb5; }
+  .status-done        { background: #e8f5ec; color: #2e7a47; border-color: #c4e5cf; }
+
+  /* ---------- פס צבעוני לפי עדיפות ---------- */
+  /* border-inline-start = הצד שבו הטקסט מתחיל (בעברית: ימין) */
+  li.card-urgent { border-inline-start: 5px solid #b3403a; }
+  li.card-medium { border-inline-start: 5px solid #e0b04c; }
+  li.card-low    { border-inline-start: 5px solid #c5ced3; }
+
+  .card-done {
+    @apply opacity-55 hover:opacity-85;
+  }
+
+  /* תאריך יעד שעבר */
+  .overdue {
+    @apply font-medium text-danger;
+  }
+
+  /* ---------- עמוד התחברות ---------- */
+  .login-title {
+    @apply mt-8 text-center text-[1.6rem] font-bold text-primary;
+  }
+
+  .login-form {
+    @apply mx-auto mt-10 w-full max-w-[400px];
+  }
+
+  .login-title + .login-form {
+    @apply mt-5;
+  }
+
+  /* הודעות שגיאה (ולידציה ושרת) */
+  .error {
+    @apply mt-1 text-[0.9rem] text-danger;
+  }
+
+  /* ---------- כרטיסי סיכום ---------- */
+  .summary {
+    @apply my-4 flex flex-wrap gap-3;
+  }
+
+  .summary-card {
+    @apply flex min-w-[100px] flex-1 items-center justify-center gap-2 rounded-lg border border-[#e3e7ea] border-t-3 border-t-primary bg-white px-3 py-2 text-[0.95rem];
+  }
+
+  .summary-count {
+    @apply text-xl font-bold text-primary;
+  }
+
+  .summary-new         { border-top-color: #3a7bd5; }
+  .summary-in_progress { border-top-color: #e0a030; }
+  .summary-done        { border-top-color: #3a9a5b; }
 }
-
-/* כל האתר בעמודה אחת במרכז, והתחתית נדחפת לסוף הדף */
-#root {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 16px 32px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ---------- Header ---------- */
-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px 0;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-header h1 {
-  margin: 0;
-  font-size: 1.4rem;
-  color: var(--primary);
-}
-
-header nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
-}
-
-header a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-header a:hover {
-  color: var(--primary);
-}
-
-.user-name {
-  color: var(--muted);
-}
-
-/* כפתור ההתנתקות: משני, לא בולט */
-header button {
-  background: transparent;
-  color: var(--primary);
-}
-
-header button:hover {
-  background: var(--primary-soft);
-}
-
-/* ---------- Footer ---------- */
-footer {
-  margin-top: auto;
-  padding-top: 24px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.875rem;
-}
-
-/* ---------- טפסים ---------- */
-form {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ה-fieldset רק נועל שדות, בלי מסגרת משלו */
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-label {
-  display: block;
-  margin-bottom: 4px;
-  font-weight: 500;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  font: inherit;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--text);
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 3px solid var(--primary-soft);
-  border-color: var(--primary);
-}
-
-/* שדות נעולים */
-input:disabled,
-textarea:disabled,
-select:disabled {
-  background: var(--bg);
-  color: var(--muted);
-  cursor: not-allowed;
-}
-
-/* הודעות שגיאה והודעות מתחת לשדות */
-form p {
-  margin: 4px 0 0;
-  font-size: 0.875rem;
-}
-
-/* שורת הכפתורים בתחתית הטופס */
-.form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-}
-
-/* ---------- כפתורים ---------- */
-button {
-  font: inherit;
-  font-weight: 500;
-  padding: 8px 20px;
-  border: 1px solid var(--primary);
-  border-radius: 8px;
-  background: var(--primary);
-  color: #fff;
-  cursor: pointer;
-}
-
-button:hover {
-  background: var(--primary-hover);
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* כפתור רגיל בתוך טופס (מחיקה) */
-form button[type="button"] {
-  background: transparent;
-  color: var(--danger);
-  border-color: var(--danger);
-}
-
-form button[type="button"]:hover {
-  background: var(--danger-soft);
-}
-
-/* ---------- סינונים וחיפוש ---------- */
-.filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-/* ---------- רשימת הבקשות ---------- */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 16px 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-li {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-
-li:hover {
-  border-color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-/* כל הכרטיס לחיץ, בלי כחול ובלי קו תחתון */
-li a {
-  display: block;
-  padding: 16px 20px;
-  color: inherit;
-  text-decoration: none;
-}
-
-li h2,
-li h3 {
-  margin: 0 0 8px;
-  font-size: 1.1rem;
-}
-
-li h4,
-li h5,
-li h6 {
-  margin: 4px 0;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--muted);
-}
-
-li p {
-  margin: 4px 0;
-  color: var(--muted);
-}
-
-/* ---------- תגיות בכרטיס ---------- */
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  background: var(--bg);
-  color: var(--muted);
-  border: 1px solid var(--border);
-}
-
-/* עדיפות */
-.priority-urgent { background: #fbeceb; color: #b3403a; border-color: #f0c9c6; }
-.priority-medium { background: #fdf4e3; color: #9a6a12; border-color: #f2dfb5; }
-.priority-low    { background: #eef2f4; color: #5f6b72; border-color: #dde3e6; }
-
-/* סטטוס */
-.status-new         { background: #e8f0fb; color: #2f5d9a; border-color: #c9daf2; }
-.status-in_progress { background: #fdf4e3; color: #9a6a12; border-color: #f2dfb5; }
-.status-done        { background: #e8f5ec; color: #2e7a47; border-color: #c4e5cf; }
-
-/* ---------- פס צבעוני לפי עדיפות ובקשות שטופלו ---------- */
-/* border-inline-start = הצד שבו הטקסט מתחיל (בעברית: ימין) */
-li.card-urgent { border-inline-start: 5px solid #b3403a; }
-li.card-medium { border-inline-start: 5px solid #e0b04c; }
-li.card-low    { border-inline-start: 5px solid #c5ced3; }
-
-li.card-done {
-  opacity: 0.55;
-}
-
-li.card-done:hover {
-  opacity: 0.85;
-}
-
-/* ---------- תאריך יעד שעבר ---------- */
-li p.overdue {
-  color: var(--danger);
-  font-weight: 500;
-}
-
-/* ---------- עמוד התחברות ---------- */
-.login-form {
-  width: 100%;
-  max-width: 400px;
-  margin: 40px auto 0;
-}
-
-.login-form h2 {
-  margin: 0;
-  text-align: center;
-  color: var(--primary);
-}
-
-/* הודעות שגיאה (ולידציה ושגיאות שרת) */
-.error {
-  color: var(--danger, #c0392b);
-  font-size: 0.9rem;
-  margin: 0.25rem 0 0;
-}
-.login-title {
-  text-align: center;
-  margin: 2rem 0 0;
-  font-size: 1.6rem;
-  color: var(--primary);
-}
-
-.login-title + .login-form {
-  margin-top: 1.25rem;
-}
-.summary {
-  display: flex;
-  gap: 0.75rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
-}
-
-.summary-card {
-  flex: 1;
-  min-width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: #fff;
-  border: 1px solid #e3e7ea;
-  border-top: 3px solid var(--primary);
-  border-radius: 8px;
-  font-size: 0.95rem;
-}
-
-.summary-count {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.summary-new { border-top-color: #3a7bd5; }
-.summary-in_progress { border-top-color: #e0a030; }
-.summary-done { border-top-color: #3a9a5b; }
