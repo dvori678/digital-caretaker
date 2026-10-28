@@ -166,36 +166,15 @@
     @apply font-medium text-danger;
   }
 
-  /* ---------- עמוד התחברות ---------- */
-
-
-  .login-form {
-    @apply mx-auto mt-10 w-full max-w-[400px];
-  }
-
-  .login-title + .login-form {
-    @apply mt-5;
-  }
 
   /* הודעות שגיאה (ולידציה ושרת) */
   .error {
     @apply mt-1 text-[0.9rem] text-danger;
   }
 
-  /* ---------- כרטיסי סיכום ---------- */
-  .summary {
-    @apply my-4 flex flex-wrap gap-3;
-  }
 
-  .summary-card {
-    @apply flex min-w-[100px] flex-1 items-center justify-center gap-2 rounded-lg border border-[#e3e7ea] border-t-3 border-t-primary bg-white px-3 py-2 text-[0.95rem];
-  }
 
-  .summary-count {
-    @apply text-xl font-bold text-primary;
-  }
-
-  .summary-new         { border-top-color: #3a7bd5; }
-  .summary-in_progress { border-top-color: #e0a030; }
-  .summary-done        { border-top-color: #3a9a5b; }
 }
+.summary-new         { border-top-color: #3a7bd5; }
+.summary-in_progress { border-top-color: #e0a030; }
+.summary-done        { border-top-color: #3a9a5b; }

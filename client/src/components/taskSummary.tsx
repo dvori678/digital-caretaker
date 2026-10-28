@@ -10,10 +10,10 @@ const TaskSummary = () => {
     })
     if (!data) return null
     return (
-        <div className="summary">
+        <div className="my-4 flex flex-wrap gap-3">
             {Object.entries(statusLabels).map(([key, text]) => (
-                <div key={key} className={`summary-card summary-${key}`}>
-                    <span className="summary-count">{data.filter((task: TaskType) => key === task.status).length}</span>
+                <div key={key} className={`flex min-w-[100px] flex-1 items-center justify-center gap-2 rounded-lg border border-[#e3e7ea] border-t-3 bg-white px-3 py-2 text-[0.95rem] summary-${key}`}>
+                    <span className="text-xl font-bold text-primary">{data.filter((task: TaskType) => key === task.status).length}</span>
                     <span>{text}</span>
                 </div>
             ))}
