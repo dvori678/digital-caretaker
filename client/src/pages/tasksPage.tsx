@@ -27,10 +27,10 @@ const TasksPage = () => {
         {isLoading && <p>טוען בקשות...</p>}
         {error && <p className="error">שגיאה: {error.message}</p>}
         {data && (data.length === 0 ? <p>אין בקשות להצגה</p> :
-            <ul>
+            <ul className="mt-4 flex flex-col gap-3">
                 {data.map((task: TaskType) => (
-                    <li key={task._id} className={`card-${task.priority} card-${task.status}`}>
-                        <Link to={`/tasks/${task._id}`}>
+                    <li key={task._id} className={`rounded-card border border-line bg-card transition-[border-color,box-shadow] duration-150 hover:border-primary hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] card-${task.priority} card-${task.status}`}>
+                        <Link className="block px-5 py-4" to={`/tasks/${task._id}`}>
                             <Task task={task} />
                         </Link>
                     </li>

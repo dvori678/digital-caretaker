@@ -8,7 +8,7 @@ type TaskFiltersBarProps = {
 }
 
 const TaskFiltersBar = ({ filters, onFiltersChange }: TaskFiltersBarProps) => {
-    return <div className="filters">
+    return <div className="mb-3 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3">
         <FilterSelect label="סטטוס" value={filters.status} options={statusLabels}
             onChange={(value) => onFiltersChange({ ...filters, status: value })} />
         <FilterSelect label="עדיפות" value={filters.priority} options={priorityLabels}

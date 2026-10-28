@@ -83,20 +83,6 @@
     @apply border-danger bg-transparent text-danger hover:bg-danger-soft;
   }
 
-  /* ---------- רשימת הבקשות ---------- */
-  ul {
-    @apply mt-4 flex flex-col gap-3;
-  }
-
-  li {
-    @apply rounded-card border border-line bg-card transition-[border-color,box-shadow] duration-150;
-    @apply hover:border-primary hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)];
-  }
-
-  /* כל הכרטיס לחיץ */
-  li a {
-    @apply block px-5 py-4;
-  }
 
   li h2,
   li h3 {
@@ -127,10 +113,6 @@
     @apply flex flex-wrap items-center gap-3;
   }
 
-  /* סינונים וחיפוש */
-  .filters {
-    @apply mb-3 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3;
-  }
 
   /* ---------- תגיות בכרטיס ---------- */
   .badges {
@@ -153,9 +135,6 @@
 
   /* ---------- פס צבעוני לפי עדיפות ---------- */
   /* border-inline-start = הצד שבו הטקסט מתחיל (בעברית: ימין) */
-  li.card-urgent { border-inline-start: 5px solid #b3403a; }
-  li.card-medium { border-inline-start: 5px solid #e0b04c; }
-  li.card-low    { border-inline-start: 5px solid #c5ced3; }
 
   .card-done {
     @apply opacity-55 hover:opacity-85;
@@ -178,3 +157,6 @@
 .summary-new         { border-top-color: #3a7bd5; }
 .summary-in_progress { border-top-color: #e0a030; }
 .summary-done        { border-top-color: #3a9a5b; }
+li.card-urgent { border-inline-start: 5px solid #b3403a; }
+li.card-medium { border-inline-start: 5px solid #e0b04c; }
+li.card-low    { border-inline-start: 5px solid #c5ced3; }
