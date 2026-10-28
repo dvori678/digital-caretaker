@@ -8,15 +8,15 @@ const Task = ({ task }: { task: TaskType }) => {
     today.setHours(0, 0, 0, 0)
     const isOverdue = !!task.dueDate && task.status !== "done" && new Date(task.dueDate) < today
     return (<>
-        <h3>{task.title}</h3>
+        <h3 className="mb-2 text-[1.1rem] font-bold">{task.title}</h3>
         <p>{task.description}</p>
         <p>מיקום: {task.location}</p>
-        <div className="badges">
+        <div className="mt-3 flex flex-wrap gap-2">
             <span className="badge">{categoryLabels[task.category]}</span>
             <span className={`badge priority-${task.priority}`}>{priorityLabels[task.priority]}</span>
             <span className={`badge status-${task.status}`}>{statusLabels[task.status]}</span>
         </div>
-        {task.dueDate && <p className={isOverdue ? "overdue" : undefined}>
+        {task.dueDate && <p className={isOverdue ? "font-medium text-danger" : undefined}>
             תאריך יעד {isOverdue && "⚠️"}: {new Date(task.dueDate).toLocaleDateString("he-IL")}</p>}
         {task.caretakerNote && <p>הערת אב הבית: {task.caretakerNote}</p>}
         {user?.role === "caretaker" && <p>שולח הבקשה: {task.createdBy.name}</p>}
