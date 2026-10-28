@@ -45,10 +45,7 @@
     @apply flex flex-col gap-4 rounded-card border border-line bg-card p-6;
   }
 
-  /* ה-fieldset רק נועל שדות, בלי מסגרת משלו */
-  fieldset {
-    @apply m-0 flex min-w-0 flex-col gap-4 border-0 p-0;
-  }
+
 
   label {
     @apply mb-1 block font-medium;
@@ -96,11 +93,6 @@
 @layer components {
   .user-name {
     @apply text-muted;
-  }
-
-  /* שורת הכפתורים בתחתית הטופס */
-  .form-actions {
-    @apply flex flex-wrap items-center gap-3;
   }
 
 

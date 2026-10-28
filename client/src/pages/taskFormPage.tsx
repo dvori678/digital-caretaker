@@ -69,7 +69,7 @@ const TaskFormPage = () => {
     if (isTaskLoading) return <p>טוען בקשה...</p>
     if (taskError) return <p className="error">שגיאה: {taskError.message}</p>
     return (<form onSubmit={handleSubmit(onSubmit)}>
-        <fieldset disabled={isLocked}>
+        <fieldset className="m-0 flex min-w-0 flex-col gap-4 border-0 p-0" disabled={isLocked}>
             <FormField id="title" label="כותרת" error={errors.title?.message}>
                 <input {...register("title")} id="title" />
             </FormField>
@@ -113,10 +113,10 @@ const TaskFormPage = () => {
             </>
             }
         </fieldset>
-        <div className="form-actions">
+        <div className="flex flex-wrap items-center gap-3">
             {error && <p className="error">{error.message}</p>}
             {isLocked ? <p className="error">אי אפשר לערוך בקשה שכבר התחילו לטפל בה</p> : <button disabled={isPending}>{isPending ? "שומר..." : isEdit ? "עדכון בקשה" : "יצירת בקשה"}</button>}
-            {isEdit && !isLocked && <button type="button" onClick={handleDelete} disabled={isPendingDelete}>{isPendingDelete ? "מוחק..." : "מחיקה"}</button>}
+            {isEdit && !isLocked && <button type="button" className="border-danger bg-transparent text-danger hover:bg-danger-soft" onClick={handleDelete} disabled={isPendingDelete}>{isPendingDelete ? "מוחק..." : "מחיקה"}</button>}
             {errorDelete && <p className="error">{errorDelete.message}</p>}
         </div>
     </form>)
